@@ -32,12 +32,13 @@
             this.radioButtonLangCHT = new System.Windows.Forms.RadioButton();
             this.radioButtonLangENG = new System.Windows.Forms.RadioButton();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.checkBoxCF = new System.Windows.Forms.CheckBox();
+            this.checkBoxPatchJap = new System.Windows.Forms.CheckBox();
             this.buttonProcess = new System.Windows.Forms.Button();
             this.radioButtonTT = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.label2 = new System.Windows.Forms.Label();
+            this.checkBoxPatchGame = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // radioButtonLangCHT
@@ -58,6 +59,7 @@
             this.radioButtonLangENG.Name = "radioButtonLangENG";
             this.radioButtonLangENG.Size = new System.Drawing.Size(124, 24);
             this.radioButtonLangENG.TabIndex = 1;
+            this.radioButtonLangENG.TabStop = true;
             this.radioButtonLangENG.Text = "Use text\\eng";
             this.radioButtonLangENG.UseVisualStyleBackColor = true;
             // 
@@ -74,19 +76,19 @@
             this.textBox1.Size = new System.Drawing.Size(573, 406);
             this.textBox1.TabIndex = 2;
             // 
-            // checkBoxCF
+            // checkBoxPatchJap
             // 
-            this.checkBoxCF.AutoSize = true;
-            this.checkBoxCF.Location = new System.Drawing.Point(12, 139);
-            this.checkBoxCF.Name = "checkBoxCF";
-            this.checkBoxCF.Size = new System.Drawing.Size(112, 24);
-            this.checkBoxCF.TabIndex = 3;
-            this.checkBoxCF.Text = "Create File";
-            this.checkBoxCF.UseVisualStyleBackColor = true;
+            this.checkBoxPatchJap.AutoSize = true;
+            this.checkBoxPatchJap.Location = new System.Drawing.Point(12, 139);
+            this.checkBoxPatchJap.Name = "checkBoxPatchJap";
+            this.checkBoxPatchJap.Size = new System.Drawing.Size(131, 24);
+            this.checkBoxPatchJap.TabIndex = 3;
+            this.checkBoxPatchJap.Text = "Patch text\\jap";
+            this.checkBoxPatchJap.UseVisualStyleBackColor = true;
             // 
             // buttonProcess
             // 
-            this.buttonProcess.Location = new System.Drawing.Point(12, 169);
+            this.buttonProcess.Location = new System.Drawing.Point(12, 199);
             this.buttonProcess.Name = "buttonProcess";
             this.buttonProcess.Size = new System.Drawing.Size(188, 62);
             this.buttonProcess.TabIndex = 4;
@@ -115,7 +117,7 @@
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(12, 267);
+            this.progressBar1.Location = new System.Drawing.Point(12, 286);
             this.progressBar1.Name = "progressBar1";
             this.progressBar1.Size = new System.Drawing.Size(188, 53);
             this.progressBar1.TabIndex = 7;
@@ -123,24 +125,35 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(69, 284);
+            this.label2.Location = new System.Drawing.Point(69, 303);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(77, 20);
             this.label2.TabIndex = 8;
             this.label2.Text = "Complete";
             this.label2.Visible = false;
             // 
+            // checkBoxPatchGame
+            // 
+            this.checkBoxPatchGame.AutoSize = true;
+            this.checkBoxPatchGame.Location = new System.Drawing.Point(12, 169);
+            this.checkBoxPatchGame.Name = "checkBoxPatchGame";
+            this.checkBoxPatchGame.Size = new System.Drawing.Size(149, 24);
+            this.checkBoxPatchGame.TabIndex = 9;
+            this.checkBoxPatchGame.Text = "Patch game.exe";
+            this.checkBoxPatchGame.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.checkBoxPatchGame);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.progressBar1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.radioButtonTT);
             this.Controls.Add(this.buttonProcess);
-            this.Controls.Add(this.checkBoxCF);
+            this.Controls.Add(this.checkBoxPatchJap);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.radioButtonLangENG);
             this.Controls.Add(this.radioButtonLangCHT);
@@ -157,12 +170,13 @@
         private System.Windows.Forms.RadioButton radioButtonLangCHT;
         private System.Windows.Forms.RadioButton radioButtonLangENG;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.CheckBox checkBoxCF;
+        private System.Windows.Forms.CheckBox checkBoxPatchJap;
         private System.Windows.Forms.Button buttonProcess;
         private System.Windows.Forms.RadioButton radioButtonTT;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.CheckBox checkBoxPatchGame;
     }
 }
 

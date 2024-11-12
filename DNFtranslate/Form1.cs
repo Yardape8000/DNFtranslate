@@ -80,11 +80,6 @@ namespace DNFtranslate
             // \jap\global.lxb
             string fileJapPath = "text\\jap\\global.lxb";
             string fileJapPathBak = "text\\jap\\global.lxb.bak";
-            if (checkBoxCF.Checked && File.Exists(fileJapPathBak))
-            {
-                MessageBox.Show(fileJapPathBak + " - already exists." + Environment.NewLine + "Fix/Rename it so you do not overwrite your original backup and try again.");
-                return;
-            }
             if (!File.Exists(fileJapPath))
             {
                 MessageBox.Show(fileJapPath + " - does not exist.");
@@ -270,15 +265,54 @@ namespace DNFtranslate
             newFile[4] = (byte)(textAddress & 0xff);
 
             // copy current second instance
-            int secondInstanceLegth = fileJap.Length - fileJapData.secondBlockAddress;
-            Array.Copy(fileJap, fileJapData.secondBlockAddress, newFile, textAddress, secondInstanceLegth);
-            textAddress += secondInstanceLegth;
+            int secondInstanceLength = fileJap.Length - fileJapData.secondBlockAddress;
+            Array.Copy(fileJap, fileJapData.secondBlockAddress, newFile, textAddress, secondInstanceLength);
+            textAddress += secondInstanceLength;
             Array.Resize(ref newFile, textAddress);
             
 
-            if (checkBoxCF.Checked) File.WriteAllBytes(fileJapPathBak, fileJap);    // backup jap\ file
-            if (checkBoxCF.Checked) File.WriteAllBytes(fileJapPath, newFile);
+            if (checkBoxPatchJap.Checked && !File.Exists(fileJapPathBak)) File.WriteAllBytes(fileJapPathBak, fileJap);    // backup jap\ file
+            if (checkBoxPatchJap.Checked) File.WriteAllBytes(fileJapPath, newFile);
             textBox1.Refresh();
+
+            if (checkBoxPatchGame.Checked)
+            {
+                // patch test menu in game.exe
+                string gameDiffPath = "game.exe.diff.txt";
+                string gamePath = "game.exe";
+                if (!File.Exists(gameDiffPath))
+                {
+                    MessageBox.Show(gameDiffPath + " - does not exist.");
+                    return;
+                }
+                if (!File.Exists(gamePath))
+                {
+                    MessageBox.Show(gamePath + " - does not exist.");
+                    return;
+                }
+                string[] lines = File.ReadAllLines(gameDiffPath);
+                if (lines == null || lines.Length < 2 || lines[0] != "{Address (in Hex)}:{Max Text Length (in Hex)} {7-bit ASCII Text}")
+                {
+                    MessageBox.Show(gameDiffPath + " - file bad.");
+                    return;
+                }
+                byte[] gameFile = File.ReadAllBytes(gamePath);
+                if (!File.Exists(gamePath + ".bak"))
+                    File.WriteAllBytes(gamePath + ".bak", gameFile);    // backup game.exe
+                foreach (string line in lines)
+                {
+                    if (line == null || line.Length < 13 || line[8] != ':') continue;
+                    int offset = Convert.ToInt32(line.Substring(0, 8), 16);
+                    int length = Convert.ToInt32(line.Substring(9, 2), 16);
+                    string text = line.Substring(12);
+                    if (text.Length > length) continue;
+                    byte[] bytes = Encoding.ASCII.GetBytes(text);
+                    Array.Clear(gameFile, offset, length);
+                    Array.Copy(bytes, 0, gameFile, offset, bytes.Length);
+                }
+                File.WriteAllBytes(gamePath, gameFile);
+            }
+
             label2.Visible = true;
         }
     }
