@@ -1,4 +1,6 @@
 # DNFtranslate
+Do Not Fall - Run for Your Drink
+Translation Utility
 v1.1
 
 Quick version:  put all files in your game folder.  Run DNFtranslate.  Select "Patch text\jap" and "Patch game.exe", then select Process.  You have now translated the game and Test Menu to English.
